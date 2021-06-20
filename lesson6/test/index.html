@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+  <script>
+
+    // Preview
+    // fetch('https://api.sampleapis.com/futurama/characters')
+    // 	.then(value => value.json())
+    // 	.then(value => {
+    //               console.log(value); 
+    // 		for (const item of value) {
+    // 			let div = document.createElement('div');
+
+    // 		     let title = document.createElement('h2');
+    // 			title.innerText = `${item.name.first} ${item.name.last}`;
+    // 			div.appendChild(title);
+
+    // 			let img = document.createElement('img');
+    // 			img.src = item.images.main;
+    // 			div.appendChild(img);
+    // 			document.body.appendChild(div);
+
+    //                   let button = document.createElement('button')
+    //                   div.appendChild(button);
+
+
+    // 		}
+
+    // 	});
+
+
+    // setTimeout(() => {
+    //   console.log(1);
+    // }, 3000)
+    //
+    // console.log(2)
+    //
+    // setTimeout(() => {
+    //   console.log(3);
+    // }, 1000)
+    //
+    //
+    // let elementById = document.getElementById('btn');
+    //
+    // elementById.onclick = () => {
+    //   console.log('CLC');
+    // }
+    //
+    // let i = 0;
+    // while (i < 999999999) {
+    //   i++
+    // }
+    //
+
+
+    // function withCB(a, cb) {
+    //   console.log(a);
+    //   cb();
+    // }
+
+    // //
+    // withCB(10, () => {
+    //   console.log('HELLO World')
+    // })
+
+
+
+
+    let money = 100;
+
+    function gotWork(isJobDone) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (isJobDone) {
+            money += 500
+            resolve('Зробив роботу добре');
+
+          } else {
+           reject('No way')
+          }
+        }, 2000)
+
+      })
+
+
+    }
+
+    function buyStaff(moneyForStaff) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (moneyForStaff > 200) {
+            console.log('купив кеди в ашані');
+            moneyForStaff = moneyForStaff - 150;
+            resolve(moneyForStaff);
+
+          } else {
+            reject('No money no honey')
+          }
+        }, 1500)
+      })
+ 
+    }
+
+      
+  function goEat(moneyForEat) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (moneyForEat < 200) {
+        reject('Сьогодні без їжі')
+      } else {
+        console.log('Смакота')
+        resolve(moneyForEat - 200);
+      }
+    }, 3000)
+  })
+}
+    
+
+  // gotWork(true)
+  // .then(result => {
+  //   console.log(result);
+
+  //   return 'Hello';
+
+  // })
+  // .catch(reason => {
+  //   console.log(reason)
+  // })
+  // .finally(() =>{
+  //   console.log('fjjfjf')
+  // })
+
+
+
+    async function goToFactory (){
+      try {
+        let resultAfterWork = await gotWork(true)
+      console.log(resultAfterWork, 'resultAfterWork')
+
+      let moneyAfterStaff = await buyStaff(money);
+
+      console.log(moneyAfterStaff, 'moneyAfterStaff');
+
+      let moneyAfterEat = await goEat(moneyAfterStaff);
+
+      console.log(moneyAfterEat, 'moneyAfterEat')
+      } catch(e){
+        console.log(e, 'errrooror')
+      }
+
+    }
+
+   goToFactory();
+
+
+
+
+    // gotWork(true)
+    //   .then(value => {  // коли буде виконано
+    //     console.log(value);
+    //     buyStaff(money).then(value1 => {
+    //         console.log(value1);
+    //         goEat().then((value2) => {
+    //           console.log(value2)
+    //         }); 
+    //     })
+    //   });
+
+
+// let money = 100;
+
+// function gotWork(isJobDone) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (isJobDone) {
+//         money += 500
+//         resolve('Зробив роботу добре!');
+//       } else {
+//         reject('Перше зроби роботу, лінива ти дупа')
+//       }
+//     }, 2000)
+//   })
+// }
+
+// function buyStaff(moneyForStaff) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (moneyForStaff > 200) {
+//         console.log('купив кеди в ашані');
+//         moneyForStaff = moneyForStaff - 150;
+//         resolve(moneyForStaff);
+//       } else {
+//         reject('No money no honey')
+//       }
+//     }, 1500)
+//   })
+// }
+
+// function goEat(moneyForEat) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (moneyForEat < 200) {
+//         reject('Сьогодні без їжі')
+//       } else {
+//         console.log('Смакота')
+//         resolve(moneyForEat - 200);
+//       }
+//     }, 3000)
+//   })
+// }
+
+// gotWork(true)
+//   .then(result => {
+//     console.log(result);
+//
+//     return buyStaff(money)
+//   })
+//   .then(moneyAfterStaff => {
+//     console.log(moneyAfterStaff, ' решта пісял кедів');
+//
+//     return goEat(moneyAfterStaff);
+//   })
+//   .then(moneyAfterEat => {
+//     console.log(moneyAfterEat, 'решат з їжі');
+//   })
+//   .catch(reason => {
+//     console.log('***********************');
+//     console.log(reason);
+//     console.log('***********************');
+//   })
+//   .finally(() => {
+//     console.log('FINAL')
+//   })
+
+
+
+
+// async function goToFactory() {
+//   try {
+
+//   let resultAfterWork = await gotWork(true);
+
+//   console.log(resultAfterWork, 'resultAfterWork');
+
+//   let moneyAfterStaff = await buyStaff(money);
+
+//   console.log(moneyAfterStaff, 'moneyAfterStaff');
+
+//   let moneyAfterEat = await goEat(moneyAfterStaff);
+
+//   console.log(moneyAfterEat, 'moneyAfterEat');
+//   } catch (e) {
+//     console.log('*************************');
+//     console.log(e);
+//     console.log('*************************');
+//   }
+// }
+
+// goToFactory();
+
+  </script>
+</body>
+
+</html>

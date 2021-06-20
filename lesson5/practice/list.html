@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List page</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        if (localStorage.getItem('listItem')) {
+            let result = localStorage.getItem('listItem');
+            let parsedItem = JSON.parse(result);
+            console.log(parsedItem);
+            for (const iterator of parsedItem) {
+               
+                let div = document.createElement('div');
+                let title = document.createElement('h2')
+                title.innerHTML = `${iterator.name} ${iterator.quantity} ${iterator.price}`;
+                div.append(title);
+
+                let image = document.createElement('img');
+                image.src = `${iterator.img}`;
+                div.appendChild(image)
+
+                let button = document.createElement('button');
+                button.innerHTML = 'Delete';
+                button.addEventListener('click', (e) => {
+                    localStorage.clear();
+                    div.style = 'display:none;'
+                })
+                console.log(button)
+           
+                div.append(button);
+
+                document.body.appendChild(div);
+            }
+
+        }else {
+            console.log('return to a previous page');
+        }
+
+    </script>
+</body>
+
+</html>
